@@ -18,4 +18,4 @@ if __name__ == '__main__':
         for dataset in glob.glob(dag_path):
             filename = os.path.basename(dataset)
             f.write(
-                'pre_processing/pre_check.exe ' + in_path_cygwin + filename + ' -i ' + out_path_cygwin + filename + ' &> ' + out_path_cygwin + filename + '_log\n')
+                'pre_processing/pre_check.exe ' + in_path_cygwin + filename + ' -i ' + out_path_cygwin + filename + ' &> ' + out_path_cygwin + filename + '.log\n')

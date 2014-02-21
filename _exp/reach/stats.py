@@ -15,11 +15,11 @@ data = {
     'cpt': directed + '*.cpt',
     'dag': directed + '*.dag',
     'clean': directed + '*.clean',
-    'tflabel_log': tflabel_log + '*_log'
+    'tflabel_log': tflabel_log + '*.log'
 }
 
-# for f in glob.glob(directed + '*test*'):
-#     os.rename(f, f.replace('test', 'txt'))
+# for f in glob.glob(data['tflabel_log']):
+#     os.rename(f, f.replace('clean_', 'clean.'))
 
 name = [os.path.splitext(os.path.basename(p))[0] for p in glob.glob(data['origin'])]
 print name.__len__()
