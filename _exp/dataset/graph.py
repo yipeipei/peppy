@@ -39,10 +39,10 @@ def split_wcc(source, dest=None, suffix='.wcc_'):
 
             # store graph
             for i in range(0, N_component):
-                with open(dest_list[i], 'w') as dest:
-                    dest.write(str(v_list[i]) + ' ' + str(len(e_list[i])) + '\n')
+                with open(dest_list[i], 'w') as out:
+                    out.write(str(v_list[i]) + ' ' + str(len(e_list[i])) + '\n')
                     for u, v in e_list[i]:
-                        dest.write(str(v_map[i][u]) + ' ' + str(v_map[i][v]) + '\n')
+                        out.write(str(v_map[i][u]) + ' ' + str(v_map[i][v]) + '\n')
 
 
 if __name__ == '__main__':
