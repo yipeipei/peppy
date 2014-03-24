@@ -135,5 +135,6 @@ if __name__ == '__main__':
     for i in range(0, len(f_list)/4):
         tflabel = TFLabel(f_list[4*i: 4*(i+1)])
         print '\t'.join(tflabel.stats())
-        tflabel.show_label()
-        print '\n'*2
+        if tflabel.v < 50:
+            tflabel.show_label()
+            print '\n'*2
