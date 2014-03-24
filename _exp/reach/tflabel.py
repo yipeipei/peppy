@@ -2,6 +2,7 @@ import glob
 import os
 
 import numpy as np
+import sys
 from _exp.exp import Exp
 
 
@@ -44,7 +45,7 @@ class TFLabel():
                 for s in self.tflabel_size:
                     self.tflabel.append(np.fromfile(f, dtype=np.uint32, count=s))
             # affiliate info
-            self.name = os.path.basename(files[0])
+            self.name = os.path.basename(files[1])
             self.v = len(self.dag_label)
             # check constraint
             assert len(self.dag_label) == os.stat(files[0]).st_size/4
@@ -95,7 +96,7 @@ class TFLabel():
         """
         return some key statistical info of tflabel
         """
-        return [self.name, self.v, self.size(), len(self.keep())]
+        return [self.name, str(self.v), str(self.size()), str(len(self.keep()))]
 
     def show_label(self, v='all'):
         if 'all' == v:
@@ -116,20 +117,23 @@ class TFLabel():
 
 
 if __name__ == '__main__':
-    exp = Exp()
+    # test arguments
+    if 2 != len(sys.argv):
+        print "usage:", sys.argv[0], "[glob_expr]"
+        sys.exit(-1)
 
-    tflabel_path = os.path.join(exp.temp_dir, 'tflabel_k1', '')
-    # names = ['small', 'complex']
-    names = ['']
-    print tflabel_path
-    print '\t'.join(['dataset', 'V', 'label_size', 'keep'])
-    for name in names:
-        files = glob.glob(tflabel_path + name + '*')
-        for i in range(0, len(files)/4):
-            # print os.stat(files[4*i + 1]).st_size / 4
-            tflabel = TFLabel(files[4*i: 4*(i+1)])
-            # for n in range(0, len(tflabel.tflabel_size)):
-            #     if tflabel.tflabel_size[n] != 1:
-            #         print n, tflabel.tflabel_size[n]
-            # print tflabel.tflabel_size.argmax()
-            print '\t'.join(str(i) for i in tflabel.stats())
+    # make sure is glob syntax
+    if os.path.isdir(sys.argv[1]):
+        sys.argv[1] = os.path.join(sys.argv[1], '*')
+
+    print sys.argv
+    # glob files
+    f_list = glob.glob(sys.argv[1])
+    if len(f_list) % 4:
+        print "number of files under", sys.argv[1], "is not 4N."
+
+    for i in range(0, len(f_list)/4):
+        tflabel = TFLabel(f_list[4*i: 4*(i+1)])
+        print '\t'.join(tflabel.stats())
+        tflabel.show_label()
+        print '\n'*2
