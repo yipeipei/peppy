@@ -99,7 +99,7 @@ class BiClique:
             P = set(nodes[1])
 
         stack = [(L, set(), P, set())]
-        while (stack):
+        while stack:
             L, R, P, Q = stack.pop()
             while P:  # len(P) > 0:
                 x = P.pop()
