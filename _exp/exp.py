@@ -23,4 +23,4 @@ class Exp():
 
 if __name__ == '__main__':
     exp = Exp()
-    print exp.__repr__()
+    print(exp.__repr__(), end='\n')

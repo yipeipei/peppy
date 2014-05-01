@@ -101,7 +101,7 @@ class TFLabel():
     def show_label(self, v='all'):
         if 'all' == v:
             for index, label in enumerate(self.tflabel):
-                print index % self.v, label
+                print(index % self.v, label, end='\n')
         else:
             if 0 <= v <= self.v:
                 raise NotImplemented
@@ -119,22 +119,22 @@ class TFLabel():
 if __name__ == '__main__':
     # test arguments
     if 2 != len(sys.argv):
-        print "usage:", sys.argv[0], "[glob_expr]"
+        print("usage:", sys.argv[0], "[glob_expr]")
         sys.exit(-1)
 
     # make sure is glob syntax
     if os.path.isdir(sys.argv[1]):
         sys.argv[1] = os.path.join(sys.argv[1], '*')
 
-    print sys.argv
+    print(sys.argv, end='\n')
     # glob files
     f_list = glob.glob(sys.argv[1])
     if len(f_list) % 4:
-        print "number of files under", sys.argv[1], "is not 4N."
+        print("number of files under", sys.argv[1], "is not 4N.")
 
-    for i in range(0, len(f_list)/4):
+    for i in range(0, len(f_list)//4):
         tflabel = TFLabel(f_list[4*i: 4*(i+1)])
-        print '\t'.join(tflabel.stats())
+        print('\t'.join(tflabel.stats()))
         if tflabel.v < 50:
             tflabel.show_label()
-            print '\n'*2
+            print('\n'*2)

@@ -147,10 +147,10 @@ if __name__ == '__main__':
         biclique.add_edge(edge)
 
     biclique.remove_edge((0, 5))
-    print biclique
+    print(biclique)
 
     for bc in biclique.find_cliques():
-        print bc
+        print(bc)
 
     # benchmark for cit-patents
     t0 = time.time()
@@ -159,4 +159,4 @@ if __name__ == '__main__':
     for i in range(0, e_max):
         edge = random.randint(0, v_max - 1), random.randint(0, v_max - 1)
         biclique.add_edge(edge)
-    print 'elapsed time:', time.time() - t0
+    print('elapsed time:', time.time() - t0)
